@@ -173,9 +173,8 @@ async def receive_pwm_sample(dut, signal, channel):
         rise_time = cocotb.utils.get_sim_time(units="ns")
         
         #If signal is stuck
-
-        print((rise_time - start_time) > max_time)
         if (rise_time - start_time) > max_time:
+            print(f"{rise_time} {start_time}")
             if (high()):
                 return 1, 0
             elif (low()):
