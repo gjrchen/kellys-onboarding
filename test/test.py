@@ -171,8 +171,10 @@ async def receive_pwm_sample(dut, signal, channel):
         await ClockCycles(dut.clk, 1)
         
         rise_time = cocotb.utils.get_sim_time(units="ns")
-
+        
         #If signal is stuck
+
+        print((rise_time - start_time) > max_time)
         if (rise_time - start_time) > max_time:
             if (high()):
                 return 1, 0
@@ -202,7 +204,7 @@ async def receive_pwm_sample(dut, signal, channel):
         print(f"{sum(high_times)/len(high_times)}")
         frequency = 0
         duty = 0
-
+    
     return duty, frequency
 
 @cocotb.test()
