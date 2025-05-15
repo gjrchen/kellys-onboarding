@@ -231,12 +231,10 @@ async def test_pwm_freq(dut):
     dut._log.info("Testing ui_out frequencies (Output & PWM channels 0-7)")
     for i in range(8):
         dut._log.info("Writing to Output channel %d", i)
-        ui_in_val = await send_spi_transaction(dut, 1, 0x00, 128)
-        print(ui_in_val)
+        ui_in_val = await send_spi_transaction(dut, 1, 0x00, 0xFF)
 
         dut._log.info("Writing to PWM channel %d", i)
-        ui_in_val = await send_spi_transaction(dut, 1, 0x02, 128)
-        print(ui_in_val)
+        ui_in_val = await send_spi_transaction(dut, 1, 0x02, 0xFF)
 
         dut._log.info("Reading PWM channel %d", i)
         duty, frequency = await receive_pwm_sample(dut, dut.uo_out, channel=i)
