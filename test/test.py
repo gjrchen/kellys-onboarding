@@ -198,6 +198,8 @@ async def receive_pwm_sample(dut, signal, channel):
         frequency = 1E9/avg_period
         duty = avg_high_times/avg_period
     else:
+        print(f"defaulting {periods}")
+        print(f"{sum(high_times)/len(high_times)}
         frequency = 0
         duty = 0
 
